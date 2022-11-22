@@ -356,9 +356,15 @@
 "Assets/scripts/Bed.cs"
 "Assets/scripts/BildingsGrid.cs"
 "Assets/scripts/Building.cs"
-"Assets/scripts/Item.cs"
+"Assets/scripts/items/flourItem.cs"
+"Assets/scripts/items/Item.cs"
+"Assets/scripts/items/mealItem.cs"
+"Assets/scripts/items/meatItem.cs"
+"Assets/scripts/items/woodItem.cs"
 "Assets/scripts/Person.cs"
 "Assets/scripts/TaskManager.cs"
+"Assets/scripts/tree.cs"
+"Assets/scripts/treeManager.cs"
 -langversion:9.0
 
 /deterministic

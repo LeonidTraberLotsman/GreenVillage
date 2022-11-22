@@ -9,8 +9,9 @@ public class TaskManager : MonoBehaviour
 
     public Item example;
     public Item examplePrefab;
-    List<NPCtask> all_tasks = new List<NPCtask>();                                                                                                                                                                 
-
+    List<NPCtask> all_tasks = new List<NPCtask>();
+    treeManager treeManager;
+    public GameObject WoodPrefab;
     public enum professions{ 
         WoodCutter,
         Postman,
@@ -50,6 +51,31 @@ public class TaskManager : MonoBehaviour
 
     }
 
+    public class WoodCutTask : NPCtask
+    {
+        public tree Tree;
+        
+
+        public WoodCutTask(tree cut_tree)
+        {
+            Tree = cut_tree;
+            
+        }
+
+        public override IEnumerator DoTask(Person person)
+        {
+            yield return person.ReachPoint(Tree.transform.position);
+            yield return new WaitForSeconds(2);
+
+            //GameObject wood = Instantiate(WoodPrefab);
+            //wood.transform.position = Tree.transform.position;
+            
+            
+
+        }
+
+    }
+
     public NPCtask GetTask(professions prof)
     {
 
@@ -66,6 +92,14 @@ public class TaskManager : MonoBehaviour
                 all_tasks.Remove(t);
                 return t;
             }
+
+            if (prof == professions.WoodCutter && all_tasks[i] is WoodCutTask)
+            {
+                Debug.Log("wood task created");
+                NPCtask t = all_tasks[i];
+                all_tasks.Remove(t);
+                return t;
+            }
         }
         Debug.Log("no work");
         return null;
@@ -75,6 +109,7 @@ public class TaskManager : MonoBehaviour
     void Start()
     {
         all_tasks.Add(new DeliverTask(example, new Vector3(0, 0, 0)));
+        all_tasks.Add(new WoodCutTask(treeManager.forest[0]));
         for (int i = 0; i < 8; i++)
         {
             example = Instantiate(examplePrefab);
