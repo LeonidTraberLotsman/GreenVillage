@@ -5,11 +5,15 @@ using UnityEngine.AI;
 
 public class Person : MonoBehaviour
 {
-    public int sleepWanting = 0;
-    public int foodWanting = 0;
-     public NavMeshAgent agent;
+    public int sleepWanting = 1000;
+    public int foodWanting = 1000;
+    public NavMeshAgent agent;
     public Bed myBed;
     public Transform Table;
+
+    public TaskManager taskManager;
+    public TaskManager.NPCtask my_task;
+    public TaskManager.professions my_profession;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,11 +44,32 @@ public class Person : MonoBehaviour
                 }
                 else
                 {
-                    yield return ReachPoint(new Vector3(0, 0, 7));
+                    yield return Work();
+                    
                 }
             }
         }
     }
+
+    public IEnumerator Work()
+    {
+        if (my_task == null)
+        {
+            my_task = taskManager.GetTask(my_profession);
+            if (my_task == null)
+            {
+                yield return ReachPoint(new Vector3(0, 0, 7));
+                yield break;
+            }
+        }
+        
+            yield return my_task.DoTask(this);
+        my_task = null;
+        
+        Debug.Log("work");
+        yield return null;
+    }
+
 
     public IEnumerator Sleep()
     {
