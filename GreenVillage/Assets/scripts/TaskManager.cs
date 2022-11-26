@@ -9,7 +9,7 @@ public class TaskManager : MonoBehaviour
 
     public Item example;
     public Item examplePrefab;
-    List<NPCtask> all_tasks = new List<NPCtask>();
+    public List<NPCtask> all_tasks = new List<NPCtask>();
     treeManager treeManager;
     public GameObject WoodPrefab;
     public enum professions{ 
@@ -46,6 +46,7 @@ public class TaskManager : MonoBehaviour
             itemToDeliver.transform.SetParent(person.transform);
             yield return person.ReachPoint(placeToDeliver);
             itemToDeliver.transform.SetParent(null);
+            yield return null;
 
         }
 
@@ -54,10 +55,11 @@ public class TaskManager : MonoBehaviour
     public class WoodCutTask : NPCtask
     {
         public tree Tree;
-        
+        GameObject woodItemPrefab;
 
-        public WoodCutTask(tree cut_tree)
+        public WoodCutTask(tree cut_tree,GameObject prefab)
         {
+            woodItemPrefab = prefab;
             Tree = cut_tree;
             
         }
@@ -66,9 +68,9 @@ public class TaskManager : MonoBehaviour
         {
             yield return person.ReachPoint(Tree.transform.position);
             yield return new WaitForSeconds(2);
-
-            //GameObject wood = Instantiate(WoodPrefab);
-            //wood.transform.position = Tree.transform.position;
+            Destroy(Tree.gameObject);
+            GameObject wood = Instantiate(woodItemPrefab);
+            wood.transform.position = Tree.transform.position+Vector3.up*5;
             
             
 
@@ -84,7 +86,7 @@ public class TaskManager : MonoBehaviour
 
         for (int i = 0; i < all_tasks.Count; i++)
         {
-            Debug.Log(i);
+            //Debug.Log(i);
             if(prof==professions.Postman && all_tasks[i] is DeliverTask)
             {
                 Debug.Log("task created");
@@ -101,7 +103,7 @@ public class TaskManager : MonoBehaviour
                 return t;
             }
         }
-        Debug.Log("no work");
+        //Debug.Log("no work");
         return null;
     }
 
@@ -109,7 +111,7 @@ public class TaskManager : MonoBehaviour
     void Start()
     {
         all_tasks.Add(new DeliverTask(example, new Vector3(0, 0, 0)));
-        all_tasks.Add(new WoodCutTask(treeManager.forest[0]));
+        //all_tasks.Add(new WoodCutTask(treeManager.forest[0]));
         for (int i = 0; i < 8; i++)
         {
             example = Instantiate(examplePrefab);
