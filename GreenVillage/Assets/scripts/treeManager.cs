@@ -9,7 +9,7 @@ public class treeManager : MonoBehaviour
     public GameObject tree_prefab;
     public GameObject wood_item;
     public List<tree> forest= new List<tree>();
-    int howManyTreesShouldBe = 6;
+    int howManyTreesShouldBe = 0;
     // Start is called before the first frame update
     void Start()
     {
