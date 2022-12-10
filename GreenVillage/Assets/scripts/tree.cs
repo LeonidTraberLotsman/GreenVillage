@@ -20,6 +20,6 @@ public class tree : MonoBehaviour
     void OnDestroy()
     {
         Debug.Log("des");
-        manager.forest.Remove(this);
+        //manager.forest.Remove(this);
     }
 }
