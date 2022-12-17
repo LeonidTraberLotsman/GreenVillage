@@ -40,15 +40,15 @@ public class Architector : MonoBehaviour
 
 
 
-                if ((i+j)%6==0)PlaceBuilding(FromCoord(new Vector2(j,i)),3);
-            if((i+j)%2==0)PlaceBuilding(FromCoord(new Vector2(j,i)),1);
-            else          PlaceBuilding(FromCoord(new Vector2(j, i)), 0);
+            //    if ((i+j)%6==0)PlaceBuilding(FromCoord(new Vector2(j,i)),3,false);
+            //if((i+j)%2==0)PlaceBuilding(FromCoord(new Vector2(j,i)),1, false);
+            //else          PlaceBuilding(FromCoord(new Vector2(j, i)), 0, false);
             }
     }
 
     public GameObject HousePrefab;
 
-    public bool PlaceBuilding(Vector3 point, int num){
+    public bool PlaceBuilding(Vector3 point, int num,bool isTask){
         Cell that_cell = GetCell(point);
         if(that_cell.MyObj!=null) return false;
         Debug.Log(that_cell.MyObj);
@@ -57,6 +57,11 @@ public class Architector : MonoBehaviour
         Debug.Log(that_cell.MyObj);
         Debug.Log(that_cell.coord);
         building.transform.position=FromCoord(that_cell.coord);
+        //BuilderTask
+        if (isTask)
+        {
+            building.GetComponent<potential_building>().Became_ghosty();
+        }
         return true;
     }
 
