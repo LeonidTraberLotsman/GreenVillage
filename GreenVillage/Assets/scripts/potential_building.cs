@@ -8,7 +8,7 @@ public class potential_building : MonoBehaviour
     public List<Color> colors;
     public bool isGhosty=false;
 
-    public void Became_ghosty()
+    public void Became_ghosty(TaskManager taskManager)
     {
         if (isGhosty) return;
         isGhosty = true;
@@ -17,7 +17,9 @@ public class potential_building : MonoBehaviour
             colors.Add(item.material.color);
             item.material.color = new Color(0.0f, 0.0f, 1.0f, 0.5f);
         }
-        StartCoroutine(BeBuild());
+
+        
+        //StartCoroutine(BeBuild());
     }
 
     public IEnumerator BeBuild()

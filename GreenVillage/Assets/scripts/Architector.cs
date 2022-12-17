@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Architector : MonoBehaviour
 {
+
+    public TaskManager taskManager;
     public enum Building
     {
         house1,
@@ -60,7 +62,8 @@ public class Architector : MonoBehaviour
         //BuilderTask
         if (isTask)
         {
-            building.GetComponent<potential_building>().Became_ghosty();
+            building.GetComponent<potential_building>().Became_ghosty(taskManager);
+            taskManager.AddPotentialBuilding( building.GetComponent<potential_building>() );
         }
         return true;
     }

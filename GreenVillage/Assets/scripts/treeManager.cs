@@ -5,11 +5,11 @@ using UnityEngine;
 public class treeManager : MonoBehaviour
 {
 
-    //public TaskManager taskManager; 
+    public TaskManager taskManager; 
     public GameObject tree_prefab;
     public GameObject wood_item;
     public List<tree> forest= new List<tree>();
-    int howManyTreesShouldBe = 0;
+    int howManyTreesShouldBe = 20;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +40,7 @@ public class treeManager : MonoBehaviour
         new_tree.transform.position = transform.position + new Vector3(Random.Range(-15f, 15f), 0, Random.Range(-15f, 15f));
         forest.Add(new_tree.GetComponent<tree>());
         new_tree.GetComponent<tree>().manager = this;
-        GetComponent<TaskManager>().all_tasks.Add(new TaskManager.WoodCutTask(new_tree.GetComponent<tree>(), wood_item));
+        GetComponent<TaskManager>().all_tasks.Add(new TaskManager.WoodCutTask(new_tree.GetComponent<tree>(), wood_item,taskManager));
     }
 
     // Update is called once per frame
