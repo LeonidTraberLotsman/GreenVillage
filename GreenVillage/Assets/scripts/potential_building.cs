@@ -8,6 +8,11 @@ public class potential_building : MonoBehaviour
     public List<Color> colors;
     public bool isGhosty=false;
 
+    public int HowMuchWeNeed = 0;
+    public List<woodItem> woods = new List<woodItem>();
+
+
+    
     public void Became_ghosty(TaskManager taskManager)
     {
         if (isGhosty) return;

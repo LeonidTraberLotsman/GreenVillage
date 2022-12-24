@@ -302,6 +302,10 @@ MonoBehaviour:
   - {fileID: 2926678747075178398}
   - {fileID: 4909153200718459233}
   - {fileID: 1460259061195419902}
+  colors: []
+  isGhosty: 0
+  HowMuchWeNeed: 3
+  woods: []
 --- !u!1 &7840580627833901280
 GameObject:
   m_ObjectHideFlags: 0

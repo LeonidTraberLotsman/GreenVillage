@@ -5,7 +5,12 @@ using UnityEngine;
 public class storage : MonoBehaviour
 {
     public List<Item> StoragedItem;
+    public Transform load_point;
 
+    public void Load(Item item)
+    {
+        StoragedItem.Add(item);
+    }
 
     // Start is called before the first frame update
     void Start()
